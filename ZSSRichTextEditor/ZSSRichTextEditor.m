@@ -107,6 +107,10 @@ static Class hackishFixClass = Nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    }
+    
     self.editorLoaded = NO;
     self.shouldShowKeyboard = YES;
     self.formatHTML = YES;
@@ -152,8 +156,9 @@ static Class hackishFixClass = Nil;
     backgroundToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     // Parent holding view
-    self.toolbarHolder = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 44)];
+    self.toolbarHolder = [[UIView alloc] initWithFrame:CGRectMake(0, 244, self.view.frame.size.width, 44)];//self.view.frame.size.height, self.view.frame.size.width, 44)];
     self.toolbarHolder.autoresizingMask = self.toolbar.autoresizingMask;
+    [self.toolbarHolder setAlpha:0];
     [self.toolbarHolder addSubview:self.toolBarScroll];
     [self.toolbarHolder insertSubview:backgroundToolbar atIndex:0];
     
@@ -533,6 +538,7 @@ static Class hackishFixClass = Nil;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 
@@ -1115,89 +1121,41 @@ static Class hackishFixClass = Nil;
 
 
 #pragma mark - Keyboard status
+-(void)keyboardWillChangeFrame:(NSNotification*)notif{
+
+    
+    NSDictionary *info = notif.userInfo;
+    //NSLog(@"%@", keyboardBoundsValue);
+    CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    CGRect rect = [[[notif userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    //NSLog(@"%@", NSStringFromCGRect(rect));
+    
+    [UIView animateWithDuration:duration animations:^{
+        CGRect frame = _toolbarHolder.frame;
+        _toolbarHolder.alpha = 1;
+        _toolbarHolder.frame = CGRectMake(0, rect.origin.y-20-44-44, frame.size.width, frame.size.height);
+        
+    }];
+    
+}
+
 
 - (void)keyboardWillShowOrHide:(NSNotification *)notification {
     
-    // Orientation
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-	
     // User Info
     NSDictionary *info = notification.userInfo;
     CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    int curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
-    CGRect keyboardEnd = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
-    // Toolbar Sizes
-    CGFloat sizeOfToolbar = self.toolbarHolder.frame.size.height;
-    
-    // Keyboard Size
-    //Checks if IOS8, gets correct keyboard height
-   CGFloat keyboardHeight = UIInterfaceOrientationIsLandscape(orientation) ? ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.000000) ? keyboardEnd.size.height : keyboardEnd.size.width : keyboardEnd.size.height;
-    
-    // Correct Curve
-    UIViewAnimationOptions animationOptions = curve << 16;
-    
-	if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
-        
-        [UIView animateWithDuration:duration delay:0 options:animationOptions animations:^{
-            
-            // Calculate Toolbar y position 
-            CGRect frameFrame = self.toolbarHolder.frame;
-            int yPos = UIInterfaceOrientationIsLandscape(orientation) ? self.view.window.frame.size.width : self.view.window.frame.size.height;
-            yPos -= (keyboardHeight + sizeOfToolbar);
-            yPos -=  self.view.frame.origin.y;
-            yPos -= UIInterfaceOrientationIsLandscape(orientation) ? [[UIApplication sharedApplication] statusBarFrame].size.width : [[UIApplication sharedApplication] statusBarFrame].size.height;
-            
-            frameFrame.origin.y = yPos;
-            
-            self.toolbarHolder.frame = frameFrame;
-            
-            // Editor View
-            const int extraHeight = 10;
-
-            CGRect editorFrame = self.editorView.frame;
-            editorFrame.size.height = (self.view.frame.size.height - keyboardHeight) - sizeOfToolbar - extraHeight;
-            self.editorView.frame = editorFrame;
-            self.editorViewFrame = self.editorView.frame;
-            self.editorView.scrollView.contentInset = UIEdgeInsetsZero;
-            self.editorView.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
-            
-            // Source View
-            CGRect sourceFrame = self.sourceView.frame;
-            sourceFrame.size.height = (self.view.frame.size.height - keyboardHeight) - sizeOfToolbar - extraHeight;
-            self.sourceView.frame = sourceFrame;
-            
-            // Provide editor with keyboard hegiht and aditor view height
-            [self setFooterHeight:(keyboardHeight - 8)];
-            [self setContentHeight: self.editorViewFrame.size.height];
-            
-        } completion:nil];
-        
-	} else {
-        
-		[UIView animateWithDuration:duration delay:0 options:animationOptions animations:^{
-            
-            CGRect frame = self.toolbarHolder.frame;
-            frame.origin.y = self.view.frame.size.height + keyboardHeight;
-            self.toolbarHolder.frame = frame;
-            
-            // Editor View
-            CGRect editorFrame = self.editorView.frame;
-            editorFrame.size.height = self.view.frame.size.height;
-            self.editorView.frame = editorFrame;
-            self.editorViewFrame = self.editorView.frame;
-            self.editorView.scrollView.contentInset = UIEdgeInsetsZero;
-            self.editorView.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
-            
-            // Source View
-            CGRect sourceFrame = self.sourceView.frame;
-            sourceFrame.size.height = self.view.frame.size.height;
-            self.sourceView.frame = sourceFrame;
-            
-        } completion:nil];
-        
-	}//end
-    
+    if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
+        [UIView animateWithDuration:duration animations:^{
+            _toolbarHolder.alpha = 1;
+        }];
+    } else {
+        [UIView animateWithDuration:duration animations:^{
+            _toolbarHolder.alpha = 0;
+        }];
+    }
 }
 
 
