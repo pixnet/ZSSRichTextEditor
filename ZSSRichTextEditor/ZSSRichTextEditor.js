@@ -444,6 +444,11 @@ zss_editor.insertImage = function(url, alt) {
 	zss_editor.enabledEditingItems();
 }
 
+zss_editor.insertMore = function()
+{
+	zss_editor.insertImage('more.png', 'zss_editor_more');
+}
+
 zss_editor.setHTML = function(html) {
 	var editor = $('#zss_editor_content');
 	editor.html(html);
@@ -468,6 +473,10 @@ zss_editor.getHTML = function() {
 					image.removeAttr('class');
 				}
 			}
+			if ('zss_editor_more' == image.attr('alt')) {
+				$('<div class="zss_editor_more"></div>').insertAfter(image);
+				image.remove();
+			}
 		});
 	}
     
@@ -487,6 +496,7 @@ zss_editor.getHTML = function() {
     
 	// Get the contents
 	var h = document.getElementById("zss_editor_content").innerHTML;
+    h = h.replace('<div class="zss_editor_more"></div>', '<!-- more -->');
     
 	return h;
 }
