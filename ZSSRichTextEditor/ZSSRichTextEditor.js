@@ -33,6 +33,10 @@ zss_editor.contentHeight = 244;
 // Sets to true when extra footer gap shows and requires to hide
 zss_editor.updateScrollOffset = false;
 
+// font size
+zss_editor.currentFontSize = 3;
+zss_editor.fontStyle = ["0", "0.63em", "0.82em", "1.0em", "1.13em", "1.5em", "2em", "3em"];
+
 /**
  * The initializer function that must be called onLoad
  */
@@ -344,6 +348,20 @@ zss_editor.setBackgroundColor = function(color) {
 	zss_editor.enabledEditingItems();
 }
 
+zss_editor.increaseFontSize = function() {
+	if (zss_editor.currentFontSize >= 7) {
+		return;
+	}
+	zss_editor.currentFontSize++;
+}
+
+zss_editor.decreaseFontSize = function() {
+	if (zss_editor.currentFontSize <= 7) {
+		return;
+	}
+	zss_editor.currentFontSize--;
+}
+
 // Needs addClass method
 
 zss_editor.insertLink = function(url, title) {
@@ -455,7 +473,9 @@ zss_editor.setHTML = function(html) {
 }
 
 zss_editor.insertHTML = function(html) {
-	document.execCommand('insertHTML', false, html);
+	$html = $(html);
+	$html.find('p').class('font-size', zss_editor.fontStyle[zss_editor.currentFontSize]);
+	document.execCommand('insertHTML', false, $html.html());
 	zss_editor.enabledEditingItems();
 }
 
