@@ -192,6 +192,7 @@ static Class hackishFixClass = Nil;
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"editor" ofType:@"html"];
         NSData *htmlData = [NSData dataWithContentsOfFile:filePath];
         NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+        /*在裡引入了 ZSSRickTextEditor.js*/
         NSString *source = [[NSBundle mainBundle] pathForResource:@"ZSSRichTextEditor" ofType:@"js"];
         NSString *jsString = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:source] encoding:NSUTF8StringEncoding];
         htmlString = [htmlString stringByReplacingOccurrencesOfString:@"<!--editor-->" withString:jsString];
