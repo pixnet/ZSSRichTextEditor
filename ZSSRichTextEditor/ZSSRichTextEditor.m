@@ -630,7 +630,10 @@ static Class hackishFixClass = Nil;
 
 - (void)loadMore:(id)sender {
     NSLog(@"load more button did pressed");
-    [self insertImage:@"http://upload.wikimedia.org/wikipedia/commons/d/df/Star_icon_1.png" alt:@"zss_editor_more"];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"more" ofType:@"png"];
+    /*因為最後還是要用 html 的方式插圖進去，所以不能用 local 端的圖，要插入一段連結才行*/
+    /*dolphin*/
+    [self insertImage:@"https://s.pixfs.net/app/more.png" alt:@"zss_editor_more"];
     /*
     NSString *trigger = @"zss_editor.insertMore();";
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
