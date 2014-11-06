@@ -486,28 +486,35 @@ static Class hackishFixClass = Nil;
         showSource.label = @"source";
         [items addObject:showSource];
     }
-     
+    /*dolphin update here*/
+    // Load more
+    if (_enabledToolbarItems & ZSSRichTextEditorToolbarViewSource || _enabledToolbarItems & ZSSRichTextEditorToolbarAll) {
+        /*圖片大小跟原本的不合，先不處理‌‌*/
+//        ZSSBarButtonItem *loadMore = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"more.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loadMore:)];
+        ZSSBarButtonItem *loadMore = [[ZSSBarButtonItem alloc] initWithTitle:@"more" style:UIBarButtonItemStylePlain target:self action:@selector(loadMore:)];
+        loadMore.label = @"loadMore";
+        [items addObject:loadMore];
+    }
     return [NSArray arrayWithArray:items];
     
 }
 
-
 - (void)buildToolbar {
-    
+
     // Check to see if we have any toolbar items, if not, add them all
     NSArray *items = [self itemsForToolbar];
     if (items.count == 0 && !(_enabledToolbarItems & ZSSRichTextEditorToolbarNone)) {
         _enabledToolbarItems = ZSSRichTextEditorToolbarAll;
         items = [self itemsForToolbar];
     }
-    
+
     if (self.customZSSBarButtonItems != nil) {
         items = [items arrayByAddingObjectsFromArray:self.customZSSBarButtonItems];
     }
-    
+
     // get the width before we add custom buttons
     CGFloat toolbarWidth = items.count == 0 ? 0.0f : (CGFloat)(items.count * 39) - 10;
-    
+
     if(self.customBarButtonItems != nil)
     {
         items = [items arrayByAddingObjectsFromArray:self.customBarButtonItems];
@@ -516,12 +523,12 @@ static Class hackishFixClass = Nil;
             toolbarWidth += buttonItem.customView.frame.size.width + 11.0f;
         }
     }
-    
+
     self.toolbar.items = items;
     for (ZSSBarButtonItem *item in items) {
         item.tintColor = [self barButtonItemDefaultColor];
     }
-    
+
     self.toolbar.frame = CGRectMake(0, 0, toolbarWidth, 44);
     self.toolBarScroll.contentSize = CGSizeMake(self.toolbar.frame.size.width, 44);
 }
@@ -529,25 +536,26 @@ static Class hackishFixClass = Nil;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowOrHide:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowOrHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Editor Interaction
 
@@ -563,23 +571,23 @@ static Class hackishFixClass = Nil;
 }
 
 - (void)setHTML:(NSString *)html {
-    
+
     self.internalHTML = html;
-    
+
     if (self.editorLoaded) {
         [self updateHTML];
     }
-    
+
 }
 
 - (void)updateHTML {
-    
+
     NSString *html = self.internalHTML;
     self.sourceView.text = html;
     NSString *cleanedHTML = [self removeQuotesFromHTML:self.sourceView.text];
 	NSString *trigger = [NSString stringWithFormat:@"zss_editor.setHTML(\"%@\");", cleanedHTML];
 	[self.editorView stringByEvaluatingJavaScriptFromString:trigger];
-    
+
 }
 
 - (NSString *)getHTML {
@@ -589,12 +597,12 @@ static Class hackishFixClass = Nil;
 	return html;
 }
 
-
 - (void)insertHTML:(NSString *)html {
     NSString *cleanedHTML = [self removeQuotesFromHTML:html];
 	NSString *trigger = [NSString stringWithFormat:@"zss_editor.insertHTML(\"%@\");", cleanedHTML];
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
+
 
 - (NSString *)getText {
     return [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.getText();"];
@@ -618,6 +626,15 @@ static Class hackishFixClass = Nil;
         self.editorView.hidden = NO;
         [self enableToolbarItems:YES];
     }
+}
+
+- (void)loadMore:(id)sender {
+    NSLog(@"load more button did pressed");
+    [self insertImage:@"http://upload.wikimedia.org/wikipedia/commons/d/df/Star_icon_1.png" alt:@"zss_editor_more"];
+    /*
+    NSString *trigger = @"zss_editor.insertMore();";
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+    */
 }
 
 - (void)removeFormat {
