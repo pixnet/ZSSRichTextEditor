@@ -473,10 +473,12 @@ zss_editor.setHTML = function(html) {
 }
 
 zss_editor.insertHTML = function(html) {
-	$html = $(html);
-	$html.find('p').class('font-size', zss_editor.fontStyle[zss_editor.currentFontSize]);
-	document.execCommand('insertHTML', false, $html.html());
-	zss_editor.enabledEditingItems();
+  $html = $('<div/>').append(html);
+  if($html.find('p').length>0){
+        $html.find('p').class('font-size', zss_editor.fontStyle[zss_editor.currentFontSize]);
+  }
+  document.execCommand('insertHTML', false, $html.html());
+  zss_editor.enabledEditingItems();
 }
 
 zss_editor.getHTML = function() {
