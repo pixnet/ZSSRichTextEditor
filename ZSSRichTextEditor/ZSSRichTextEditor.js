@@ -41,7 +41,7 @@ zss_editor.fontStyle = ["0", "0.63em", "0.82em", "1.0em", "1.13em", "1.5em", "2e
  * The initializer function that must be called onLoad
  */
 zss_editor.init = function() {
-    
+
     $('#zss_editor_content').on('touchend', function(e) {
     	zss_editor.enabledEditingItems(e);
     	var clicked = $(e.target);
@@ -49,16 +49,16 @@ zss_editor.init = function() {
     		$('img').removeClass('zs_active');
     	}
     });
-    
+
     $(document).on('selectionchange',function(e){
 		zss_editor.calculateEditorHeightWithCaretPosition();
 		zss_editor.setScrollPosition();
 	});
-    
+
     $(window).on('scroll', function(e) {
     	zss_editor.updateOffset();
     });
-    
+
     // Make sure that when we tap anywhere in the document we focus on the editor
     $(window).on('touchmove', function(e) {
 		zss_editor.isDragging = true;
@@ -73,28 +73,28 @@ zss_editor.init = function() {
 			zss_editor.focusEditor();
 		}
 	});
-    
+
 }//end
 
 zss_editor.updateOffset = function() {
-    
+
     if (!zss_editor.updateScrollOffset)
         return;
-    
+
     var offsetY = window.document.body.scrollTop;
-    
+
     var footer = $('#zss_editor_footer');
-    
+
     var maxOffsetY = footer.offset().top - zss_editor.contentHeight;
-    
+
     if (maxOffsetY < 0)
         maxOffsetY = 0;
-    
+
     if (offsetY > maxOffsetY)
     {
         window.scrollTo(0, maxOffsetY);
     }
-    
+
     zss_editor.setScrollPosition();
 }
 
@@ -113,7 +113,7 @@ zss_editor.setScrollPosition = function() {
 zss_editor.setPlaceholder = function(placeholder) {
 
     var editor = $('#zss_editor_content');
-    
+
 	//set placeHolder
     if(editor.text().length == 1){
         editor.text(placeholder);
@@ -152,24 +152,24 @@ zss_editor.getCaretYPosition = function() {
 }
 
 zss_editor.calculateEditorHeightWithCaretPosition = function() {
-    
+
     var padding = 50;
     var c = zss_editor.getCaretYPosition();
     var e = document.getElementById('zss_editor_content');
 
     var editor = $('#zss_editor_content');
-    
+
     var offsetY = window.document.body.scrollTop;
     var height = zss_editor.contentHeight;
-    
+
     var newPos = window.pageYOffset;
-    
+
     if (c < offsetY) {
         newPos = c;
     } else if (c > (offsetY + height - padding)) {
         var newPos = c - height + padding - 18;
     }
-    
+
     window.scrollTo(0, newPos);
 }
 
@@ -260,7 +260,7 @@ zss_editor.setHeading = function(heading) {
     } else {
         document.execCommand('formatBlock', false, '<'+heading+'>');
     }
-	
+
 	zss_editor.enabledEditingItems();
 }
 
@@ -274,7 +274,7 @@ zss_editor.setParagraph = function() {
     } else {
         document.execCommand('formatBlock', false, '<p>');
     }
-    
+
 	zss_editor.enabledEditingItems();
 }
 
@@ -365,16 +365,16 @@ zss_editor.decreaseFontSize = function() {
 // Needs addClass method
 
 zss_editor.insertLink = function(url, title) {
-	
+
     zss_editor.restorerange();
     var sel = document.getSelection();
 	if (sel.toString().length != 0) {
         if (sel.rangeCount) {
-			
+
 			var el = document.createElement("a");
     		el.setAttribute("href", url);
             el.setAttribute("title", title);
-			
+
             var range = sel.getRangeAt(0).cloneRange();
             range.surroundContents(el);
             sel.removeAllRanges();
@@ -385,33 +385,33 @@ zss_editor.insertLink = function(url, title) {
 }
 
 zss_editor.updateLink = function(url, title) {
-	
+
     zss_editor.restorerange();
-	
+
     if (zss_editor.currentEditingLink) {
         var c = zss_editor.currentEditingLink;
         c.attr('href', url);
         c.attr('title', title);
     }
     zss_editor.enabledEditingItems();
-    
+
 }//end
 
 zss_editor.updateImage = function(url, alt) {
-	
+
     zss_editor.restorerange();
-	
+
     if (zss_editor.currentEditingImage) {
         var c = zss_editor.currentEditingImage;
         c.attr('src', url);
         c.attr('alt', alt);
     }
     zss_editor.enabledEditingItems();
-	
+
 }//end
 
 zss_editor.unlink = function() {
-    
+
 	if (zss_editor.currentEditingLink) {
         var c = zss_editor.currentEditingLink;
         c.contents().unwrap();
@@ -420,7 +420,7 @@ zss_editor.unlink = function() {
 }
 
 zss_editor.quickLink = function() {
-	
+
 	var sel = document.getSelection();
 	var link_url = "";
 	var test = new String(sel);
@@ -445,10 +445,10 @@ zss_editor.quickLink = function() {
 			link_url = sel;
 		}
 	}
-    
+
 	var html_code = '<a href="' + link_url + '">' + sel + '</a>';
 	zss_editor.insertHTML(html_code);
-	
+
 }
 
 zss_editor.prepareInsert = function() {
@@ -481,16 +481,10 @@ zss_editor.insertHTML = function(html) {
     }
     document.execCommand('insertHTML', false, $html.html());
     zss_editor.enabledEditingItems();
-    /*
-	$html = $(html);
-	$html.find('p').class('font-size', zss_editor.fontStyle[zss_editor.currentFontSize]);
-	document.execCommand('insertHTML', false, $html.html());
-	zss_editor.enabledEditingItems();
-	*/
 }
 
 zss_editor.getHTML = function() {
-	
+
 	// Images
 	var img = $('img');
 	if (img.length != 0) {
@@ -509,7 +503,7 @@ zss_editor.getHTML = function() {
 			}
 		});
 	}
-    
+
     // Blockquote
     var bq = $('blockquote');
     if (bq.length != 0) {
@@ -523,11 +517,11 @@ zss_editor.getHTML = function() {
 			}
 		});
     }
-    
+
 	// Get the contents
 	var h = document.getElementById("zss_editor_content").innerHTML;
     h = h.replace('<div class="zss_editor_more"></div>', '<!-- more -->');
-    
+
 	return h;
 }
 
@@ -540,7 +534,7 @@ zss_editor.isCommandEnabled = function(commandName) {
 }
 
 zss_editor.enabledEditingItems = function(e) {
-	
+
 	var items = [];
 	if (zss_editor.isCommandEnabled('bold')) {
 		items.push('bold');
@@ -590,14 +584,14 @@ zss_editor.enabledEditingItems = function(e) {
 		$('img').removeClass('zs_active');
 		$(this).addClass('zs_active');
 	});
-	
+
 	// Use jQuery to figure out those that are not supported
 	if (typeof(e) != "undefined") {
-		
+
 		// The target element
 		var t = $(e.target);
 		var nodeName = e.target.nodeName.toLowerCase();
-		
+
 		// Background Color
 		var bgColor = t.css('backgroundColor');
 		if (bgColor.length != 0 && bgColor != 'rgba(0, 0, 0, 0)' && bgColor != 'rgb(0, 0, 0)' && bgColor != 'transparent') {
@@ -616,7 +610,7 @@ zss_editor.enabledEditingItems = function(e) {
             if (t.attr('title') !== undefined) {
                 items.push('link-title:'+t.attr('title'));
             }
-            
+
 		} else {
 			zss_editor.currentEditingLink = null;
 		}
@@ -631,13 +625,13 @@ zss_editor.enabledEditingItems = function(e) {
             if (t.attr('alt') !== undefined) {
                 items.push('image-alt:'+t.attr('alt'));
             }
-            
+
         } else {
             zss_editor.currentEditingImage = null;
         }
-        
+
 	}
-	
+
 	if (items.length > 0) {
 		if (zss_editor.isUsingiOS) {
 			window.location = "callback://"+items.join(',');
@@ -651,11 +645,11 @@ zss_editor.enabledEditingItems = function(e) {
 			console.log("callback://");
 		}
 	}
-	
+
 }
 
 zss_editor.focusEditor = function() {
-    
+
     // the following was taken from http://stackoverflow.com/questions/1125292/how-to-move-cursor-to-end-of-contenteditable-entity/3866442#3866442
     // and ensures we move the cursor to the end of the editor
     var editor = $('#zss_editor_content');
