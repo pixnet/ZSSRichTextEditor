@@ -142,7 +142,7 @@ zss_editor.setFooterHeight = function(footerHeight) {
 zss_editor.getCaretYPosition = function() {
     var sel = window.getSelection();
     // Next line is comented to prevent deselecting selection. It looks like work but if there are any issues will appear then uconmment it as well as code above.
-	//sel.collapseToStart();
+	sel.collapseToStart();
     var range = sel.getRangeAt(0);
     var span = document.createElement('span');
     range.insertNode(span);
@@ -180,6 +180,9 @@ zss_editor.backuprange = function(){
 }
 
 zss_editor.restorerange = function(){
+    if ('undefined' === typeof zss_editor.currentSelection) {
+        return;
+    }
 	var selection = window.getSelection();
     selection.removeAllRanges();
     var range = document.createRange();
@@ -464,9 +467,8 @@ zss_editor.insertImage = function(url, alt) {
 
 zss_editor.insertMore = function()
 {
-//	zss_editor.insertImage('more.png', 'zss_editor_more');
-    console.log('insertMore ing');
-    zss_editor.insertImage('https://s.pixfs.net/app/more.png', 'zss_editor_more');
+	zss_editor.insertImage('more.png', 'zss_editor_more');
+//    zss_editor.insertImage('https://s.pixfs.net/app/more.png', 'zss_editor_more');
 //    zss_editor.insertImage('cpimg://more.png', 'zss_editor_more');
 //    zss_editor.insertImage('http://upload.wikimedia.org/wikipedia/commons/d/df/Star_icon_1.png', 'zss_editor_more');
     zss_editor.enabledEditingItems();
