@@ -113,6 +113,8 @@
 		45F860C618A84CFA0011266B /* ZSSunlink@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45F860A418A84CFA0011266B /* ZSSunlink@2x.png */; };
 		45F860C718A84CFA0011266B /* ZSSunorderedlist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45F860A518A84CFA0011266B /* ZSSunorderedlist@2x.png */; };
 		45F860C818A84CFA0011266B /* ZSSviewsource@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45F860A618A84CFA0011266B /* ZSSviewsource@2x.png */; };
+		82FAA6F84F709617AC33ABC5 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 82FAA25549DCB1D8048577F1 /* more.png */; };
+		82FAAC1E3863985FD55B5DBE /* NSURLImageProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FAAAD90438860BC9DEE441 /* NSURLImageProtocol.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -250,6 +252,9 @@
 		45F860A418A84CFA0011266B /* ZSSunlink@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ZSSunlink@2x.png"; path = "Images/ZSSunlink@2x.png"; sourceTree = "<group>"; };
 		45F860A518A84CFA0011266B /* ZSSunorderedlist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ZSSunorderedlist@2x.png"; path = "Images/ZSSunorderedlist@2x.png"; sourceTree = "<group>"; };
 		45F860A618A84CFA0011266B /* ZSSviewsource@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ZSSviewsource@2x.png"; path = "Images/ZSSviewsource@2x.png"; sourceTree = "<group>"; };
+		82FAA25549DCB1D8048577F1 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		82FAAAD90438860BC9DEE441 /* NSURLImageProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSURLImageProtocol.m; sourceTree = "<group>"; };
+		82FAAB7BD20E2EFBF8FA7D90 /* NSURLImageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSURLImageProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +384,7 @@
 				45F860A518A84CFA0011266B /* ZSSunorderedlist@2x.png */,
 				45F73D2A18D7AE9700CD6DBA /* ZSSviewsource.png */,
 				45F860A618A84CFA0011266B /* ZSSviewsource@2x.png */,
+				82FAA25549DCB1D8048577F1 /* more.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -479,6 +485,7 @@
 			children = (
 				4552C4821899DD1D004EF847 /* CYRTextView */,
 				45EC1D6218763BDE009B6B61 /* ColorPicker */,
+				82FAAD04DE06B2C098DDA873 /* NSURLImageProtocol */,
 			);
 			name = "Third Party";
 			sourceTree = "<group>";
@@ -501,6 +508,15 @@
 				45A0CA4B18A8522A00F3F35E /* HRColorUtil.m */,
 			);
 			path = ColorPicker;
+			sourceTree = "<group>";
+		};
+		82FAAD04DE06B2C098DDA873 /* NSURLImageProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				82FAAB7BD20E2EFBF8FA7D90 /* NSURLImageProtocol.h */,
+				82FAAAD90438860BC9DEE441 /* NSURLImageProtocol.m */,
+			);
+			name = NSURLImageProtocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -640,6 +656,7 @@
 				45F860BD18A84CFA0011266B /* ZSSredo@2x.png in Resources */,
 				45F860C318A84CFA0011266B /* ZSStextcolor@2x.png in Resources */,
 				45F860B018A84CFA0011266B /* ZSSh5@2x.png in Resources */,
+				82FAA6F84F709617AC33ABC5 /* more.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,6 +690,7 @@
 				4581EBB81848F8190048CAB0 /* ZSSDemoViewController.m in Sources */,
 				45F80458189B1E9300A1EDD9 /* ZSSDemoPickerViewController.m in Sources */,
 				4513B3D8184E8F5100A9CA86 /* ZSSBarButtonItem.m in Sources */,
+				82FAAC1E3863985FD55B5DBE /* NSURLImageProtocol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

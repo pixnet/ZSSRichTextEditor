@@ -12,6 +12,7 @@
 #import "ZSSBarButtonItem.h"
 #import "HRColorUtil.h"
 #import "ZSSTextView.h"
+#import "NSURLImageProtocol.h"
 
 
 @interface UIWebView (HackishAccessoryHiding)
@@ -106,7 +107,9 @@ static Class hackishFixClass = Nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    [NSURLProtocol registerClass:[NSURLImageProtocol class]];
+
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
@@ -632,12 +635,10 @@ static Class hackishFixClass = Nil;
     NSLog(@"load more button did pressed");
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"more" ofType:@"png"];
     /*因為最後還是要用 html 的方式插圖進去，所以不能用 local 端的圖，要插入一段連結才行*/
-    /*dolphin*/
-    [self insertImage:@"https://s.pixfs.net/app/more.png" alt:@"zss_editor_more"];
-    /*
+    /*解法1: http://stackoverflow.com/questions/5572258/ios-webview-remote-html-with-local-image-files*/
+//    [self insertImage:@"https://s.pixfs.net/app/more.png" alt:@"zss_editor_more"];
     NSString *trigger = @"zss_editor.insertMore();";
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
-    */
 }
 
 - (void)removeFormat {

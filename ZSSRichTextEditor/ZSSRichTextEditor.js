@@ -465,8 +465,11 @@ zss_editor.insertImage = function(url, alt) {
 zss_editor.insertMore = function()
 {
 //	zss_editor.insertImage('more.png', 'zss_editor_more');
-    zss_editor.insertImage('http://upload.wikimedia.org/wikipedia/commons/d/df/Star_icon_1.png', 'zss_editor_more');
-//    zss_editor.enabledEditingItems();
+    console.log('insertMore ing');
+    zss_editor.insertImage('https://s.pixfs.net/app/more.png', 'zss_editor_more');
+//    zss_editor.insertImage('cpimg://more.png', 'zss_editor_more');
+//    zss_editor.insertImage('http://upload.wikimedia.org/wikipedia/commons/d/df/Star_icon_1.png', 'zss_editor_more');
+    zss_editor.enabledEditingItems();
 }
 
 zss_editor.setHTML = function(html) {
