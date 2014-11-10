@@ -12,7 +12,6 @@
 #import "ZSSBarButtonItem.h"
 #import "HRColorUtil.h"
 #import "ZSSTextView.h"
-#import "NSURLImageProtocol.h"
 
 
 @interface UIWebView (HackishAccessoryHiding)
