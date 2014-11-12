@@ -654,13 +654,6 @@ static Class hackishFixClass = Nil;
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
 - (void)loadMore:(id)sender {
-    NSLog(@"load more button did pressed");
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"more" ofType:@"png"];
-    /*因為最後還是要用 html 的方式插圖進去，所以不能用 local 端的圖，要插入一段連結才行*/
-    /*解法1: http://stackoverflow.com/questions/5572258/ios-webview-remote-html-with-local-image-files*/
-//    [self insertImage:@"https://s.pixfs.net/app/more.png" alt:@"zss_editor_more"];
-
-//    self.editorView
     NSString *trigger = @"zss_editor.insertMore();";
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }

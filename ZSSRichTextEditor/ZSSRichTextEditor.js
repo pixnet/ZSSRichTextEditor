@@ -352,7 +352,6 @@ zss_editor.setBackgroundColor = function(color) {
 }
 
 zss_editor.increaseFontSize = function() {
-    console.log(zss_editor.currentFontSize);
 	if (zss_editor.currentFontSize >= 7) {
 		return;
 	}
