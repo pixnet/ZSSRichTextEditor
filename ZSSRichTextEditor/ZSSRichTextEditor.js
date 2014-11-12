@@ -352,17 +352,20 @@ zss_editor.setBackgroundColor = function(color) {
 }
 
 zss_editor.increaseFontSize = function() {
+    console.log(zss_editor.currentFontSize);
 	if (zss_editor.currentFontSize >= 7) {
 		return;
 	}
 	zss_editor.currentFontSize++;
+    document.execCommand('FontSize', false, zss_editor.currentFontSize);
 }
 
 zss_editor.decreaseFontSize = function() {
-	if (zss_editor.currentFontSize <= 7) {
+	if (zss_editor.currentFontSize <= 1) {
 		return;
 	}
 	zss_editor.currentFontSize--;
+    document.execCommand('FontSize', false, zss_editor.currentFontSize);
 }
 
 // Needs addClass method

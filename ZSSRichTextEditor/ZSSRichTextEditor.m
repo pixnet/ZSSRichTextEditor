@@ -515,15 +515,6 @@ static Class hackishFixClass = Nil;
     
 }
 
-- (void)sizeBigger:(id)sender {
-    NSString *trigger = @"zss_editor.increaseFontSize();";
-    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
-}
-
-- (void)sizeSmaller:(id)sender {
-    NSString *trigger = @"zss_editor.decreaseFontSize();";
-    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
-}
 
 - (void)buildToolbar {
 
@@ -653,7 +644,15 @@ static Class hackishFixClass = Nil;
         [self enableToolbarItems:YES];
     }
 }
+- (void)sizeBigger:(id)sender {
+    NSString *trigger = @"zss_editor.increaseFontSize();";
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+}
 
+- (void)sizeSmaller:(id)sender {
+    NSString *trigger = @"zss_editor.decreaseFontSize();";
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+}
 - (void)loadMore:(id)sender {
     NSLog(@"load more button did pressed");
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"more" ofType:@"png"];
