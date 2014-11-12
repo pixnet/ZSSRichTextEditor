@@ -267,7 +267,17 @@ static Class hackishFixClass = Nil;
     {
         return items;
     }
-    
+
+    if (_enabledToolbarItems & ZSSRichTextEditorToolbarViewSource || _enabledToolbarItems & ZSSRichTextEditorToolbarAll) {
+        ZSSBarButtonItem *bigger= [[ZSSBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(sizeBigger:)];
+        bigger.label = @"bigger";
+        [items addObject:bigger];
+    }
+    if (_enabledToolbarItems & ZSSRichTextEditorToolbarViewSource || _enabledToolbarItems & ZSSRichTextEditorToolbarAll) {
+        ZSSBarButtonItem *smaller = [[ZSSBarButtonItem alloc] initWithTitle:@"-" style:UIBarButtonItemStylePlain target:self action:@selector(sizeSmaller:)];
+        smaller.label = @"smaller";
+        [items addObject:smaller];
+    }
     // Bold
     if (_enabledToolbarItems & ZSSRichTextEditorToolbarBold || _enabledToolbarItems & ZSSRichTextEditorToolbarAll) {
         ZSSBarButtonItem *bold = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSbold.png"] style:UIBarButtonItemStylePlain target:self action:@selector(setBold)];
@@ -493,7 +503,7 @@ static Class hackishFixClass = Nil;
         [items addObject:showSource];
     }
     /*dolphin update here*/
-    // Load more
+    // Load morhttps://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW16e
     if (_enabledToolbarItems & ZSSRichTextEditorToolbarViewSource || _enabledToolbarItems & ZSSRichTextEditorToolbarAll) {
         /*圖片大小跟原本的不合，先不處理‌‌*/
 //        ZSSBarButtonItem *loadMore = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"more.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loadMore:)];
@@ -503,6 +513,14 @@ static Class hackishFixClass = Nil;
     }
     return [NSArray arrayWithArray:items];
     
+}
+
+- (void)sizeBigger:(id)sender {
+
+}
+
+- (void)sizeSmaller:(id)sender {
+
 }
 
 - (void)buildToolbar {
