@@ -142,7 +142,7 @@ zss_editor.setFooterHeight = function(footerHeight) {
 zss_editor.getCaretYPosition = function() {
     var sel = window.getSelection();
     // Next line is comented to prevent deselecting selection. It looks like work but if there are any issues will appear then uconmment it as well as code above.
-	sel.collapseToStart();
+//	sel.collapseToStart();
     var range = sel.getRangeAt(0);
     var span = document.createElement('span');
     range.insertNode(span);

@@ -516,11 +516,13 @@ static Class hackishFixClass = Nil;
 }
 
 - (void)sizeBigger:(id)sender {
-
+    NSString *trigger = @"zss_editor.increaseFontSize();";
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
 
 - (void)sizeSmaller:(id)sender {
-
+    NSString *trigger = @"zss_editor.decreaseFontSize();";
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
 
 - (void)buildToolbar {
