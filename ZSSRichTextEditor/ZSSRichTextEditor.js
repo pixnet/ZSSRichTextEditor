@@ -153,7 +153,7 @@ zss_editor.getCaretYPosition = function() {
 
 zss_editor.calculateEditorHeightWithCaretPosition = function() {
 
-    var padding = 50;
+    var padding = 44*3;
     var c = zss_editor.getCaretYPosition();
     var e = document.getElementById('zss_editor_content');
 
