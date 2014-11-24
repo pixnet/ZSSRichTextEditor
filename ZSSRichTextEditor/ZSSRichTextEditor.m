@@ -118,6 +118,7 @@ static Class hackishFixClass = Nil;
     // Source View
     CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     self.sourceView = [[ZSSTextView alloc] initWithFrame:frame];
+    NSLog(@"width : %f , Height : %f", self.view.frame.size.width, self.view.frame.size.height );
     self.sourceView.hidden = YES;
     self.sourceView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.sourceView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -495,6 +496,20 @@ static Class hackishFixClass = Nil;
         loadMore.label = @"loadMore";
         [items addObject:loadMore];
     }
+    
+    if (_enabledToolbarItems & ZSSRichTextEditorToolbarViewSource || _enabledToolbarItems & ZSSRichTextEditorToolbarAll) {
+        ZSSBarButtonItem *increacesFortSize = [[ZSSBarButtonItem alloc] initWithTitle:@" + " style:UIBarButtonItemStylePlain target:self action:@selector(increaseFontSize)];
+        increacesFortSize.label = @"increacesFontSize";
+        [items addObject:increacesFortSize];
+        
+    }
+    
+    if (_enabledToolbarItems & ZSSRichTextEditorToolbarViewSource || _enabledToolbarItems & ZSSRichTextEditorToolbarAll) {
+        ZSSBarButtonItem *decreacesFortSize = [[ZSSBarButtonItem alloc] initWithTitle:@" - " style:UIBarButtonItemStylePlain target:self action:@selector(decreaseFontSize)];
+        decreacesFortSize.label = @"decreacesFontSize";
+        [items addObject:decreacesFortSize];
+        
+    }
     return [NSArray arrayWithArray:items];
     
 }
@@ -638,6 +653,16 @@ static Class hackishFixClass = Nil;
     NSString *trigger = @"zss_editor.insertMore();";
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
     */
+}
+
+- (void)increaseFontSize{
+    NSString *trigger = @"zss_editor.increaseFontSize()";
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+}
+
+- (void)decreaseFontSize{
+    NSString *trigger = @"zss_editor.decreaseFontSize()";
+    [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
 }
 
 - (void)removeFormat {
