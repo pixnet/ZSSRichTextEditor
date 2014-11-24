@@ -35,7 +35,7 @@ zss_editor.updateScrollOffset = false;
 
 // font size
 zss_editor.currentFontSize = 3;
-zss_editor.fontStyle = ["0", "0.63em", "0.82em", "1.0em", "1.13em", "1.5em", "2em", "3em"];
+zss_editor.fontStyle = [0, 0.63, 0.82, 1.0, 1.13, 1.5, 2, 3]; // em
 
 /**
  * The initializer function that must be called onLoad
@@ -477,7 +477,7 @@ zss_editor.setHTML = function(html) {
 zss_editor.insertHTML = function(html) {
     $html = $('<div/>').append(html);
     if($html.find('p').length>0){
-        $html.find('p').class('font-size', zss_editor.fontStyle[zss_editor.currentFontSize]);
+        $html.find('p').css('font-size', '' + zss_editor.fontStyle[zss_editor.currentFontSize] + 'em');
     }
     document.execCommand('insertHTML', false, $html.html());
     zss_editor.enabledEditingItems();
