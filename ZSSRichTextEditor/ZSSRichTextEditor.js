@@ -349,17 +349,52 @@ zss_editor.setBackgroundColor = function(color) {
 }
 
 zss_editor.increaseFontSize = function() {
-	if (zss_editor.currentFontSize >= 7) {
-		return;
+	var current_selection = $(zss_editor.getSelectedNode());
+    if (current_selection) {
+    	var font_size = parseFloat(current_selection.css('font-size'));
+    	if (font_size) {
+    		for (var i in zss_editor.fontStyle) {
+    			if (zss_editor.fontStyle[i] > font_size) {
+    				font_size = zss_editor.fontStyle[i];
+    				break;
+    			}
+    		}
+    	} else {
+    		font_size = zss_editor.fontStyle[4];
+    	}
+    	current_selection.css('font-size', '' + font_size + 'em');
+    	return;
+    } else {
+		if (zss_editor.currentFontSize >= 7) {
+			return;
+		}
+		zss_editor.currentFontSize++;
 	}
-	zss_editor.currentFontSize++;
 }
 
 zss_editor.decreaseFontSize = function() {
-	if (zss_editor.currentFontSize <= 7) {
-		return;
+	var current_selection = $(zss_editor.getSelectedNode());
+    if (current_selection) {
+    	var font_size = parseFloat(current_selection.css('font-size'));
+    	if (font_size) {
+    		for (var i in zss_editor.fontStyle) {
+    			if (zss_editor.fontStyle[7-i] < font_size) {
+    				font_size = zss_editor.fontStyle[i];
+    				break;
+    			}
+    		}
+    	} else {
+    		font_size = zss_editor.fontStyle[2];
+    	}
+    	current_selection.css('font-size', '' + font_size + 'em');
+    	return;
+	} else {
+	
+		if (zss_editor.currentFontSize <= 7) {
+			return;
+		}
+		zss_editor.currentFontSize--;
 	}
-	zss_editor.currentFontSize--;
 }
 
 // Needs addClass method
