@@ -380,8 +380,8 @@ zss_editor.decreaseFontSize = function() {
     	font_size = parseFloat(current_selection.css('font-size'));
     	if (font_size) {
     		for (var i in zss_editor.fontStyle) {
-    			if (zss_editor.fontStyle[7-i] < font_size) {
-    				font_size = zss_editor.fontStyle[i];
+    			if (zss_editor.fontStyle[7-i] < font_size && 7 != i) {
+    				font_size = zss_editor.fontStyle[7-i];
     				break;
     			}
     		}
@@ -392,8 +392,7 @@ zss_editor.decreaseFontSize = function() {
         
     	return;
 	} else {
-	
-		if (zss_editor.currentFontSize <= 7) {
+		if (zss_editor.currentFontSize <= 1) {
 			return;
 		}
 		zss_editor.currentFontSize--;
