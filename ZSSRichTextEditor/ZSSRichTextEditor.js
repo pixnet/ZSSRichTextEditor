@@ -399,6 +399,17 @@ zss_editor.decreaseFontSize = function() {
 	}
 }
 
+zss_editor.removeImage = function() {
+    var current_selection = $(zss_editor.getSelectedNode()),
+        t = current_selection.prop("tagName").toLowerCase();
+    
+    if ("img" == t) {
+        current_selection.remove();
+        return true;
+    }
+    return false;
+};
+
 // Needs addClass method
 
 zss_editor.insertLink = function(url, title) {
