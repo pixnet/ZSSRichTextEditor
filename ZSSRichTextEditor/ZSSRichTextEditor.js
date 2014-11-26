@@ -35,7 +35,7 @@ zss_editor.updateScrollOffset = false;
 
 // font size
 zss_editor.currentFontSize = 3;
-zss_editor.fontStyle = [0, 0.63, 0.82, 1.0, 1.13, 1.5, 2, 3]; // em
+zss_editor.fontStyle = [0, 12, 14, 16, 18, 20, 22, 24]; // px
 
 /**
  * The initializer function that must be called onLoad
@@ -363,7 +363,7 @@ zss_editor.increaseFontSize = function() {
     	} else {
     		font_size = zss_editor.fontStyle[4];
     	}
-    	current_selection.css('font-size', '' + font_size + 'em');
+    	current_selection.css('font-size', '' + font_size + 'px');
     	return;
     } else {
 		if (zss_editor.currentFontSize >= 7) {
@@ -388,7 +388,8 @@ zss_editor.decreaseFontSize = function() {
     	} else {
     		font_size = zss_editor.fontStyle[2];
     	}
-    	current_selection.css('font-size', '' + font_size + 'em');
+    	current_selection.css('font-size', '' + font_size + 'px');
+        
     	return;
 	} else {
 	
@@ -514,7 +515,7 @@ zss_editor.setHTML = function(html) {
 zss_editor.insertHTML = function(html) {
     $html = $('<div/>').append(html);
     if($html.find('p').length>0){
-        $html.find('p').css('font-size', '' + zss_editor.fontStyle[zss_editor.currentFontSize] + 'em');
+        $html.find('p').css('font-size', '' + zss_editor.fontStyle[zss_editor.currentFontSize] + 'px');
     }
     document.execCommand('insertHTML', false, $html.html());
     zss_editor.enabledEditingItems();
