@@ -349,9 +349,10 @@ zss_editor.setBackgroundColor = function(color) {
 }
 
 zss_editor.increaseFontSize = function() {
-	var current_selection = $(zss_editor.getSelectedNode());
+	var current_selection = $(zss_editor.getSelectedNode()),
+        font_size;
     if (current_selection) {
-    	var font_size = parseFloat(current_selection.css('font-size'));
+    	font_size = parseFloat(current_selection.css('font-size'));
     	if (font_size) {
     		for (var i in zss_editor.fontStyle) {
     			if (zss_editor.fontStyle[i] > font_size) {
@@ -373,9 +374,10 @@ zss_editor.increaseFontSize = function() {
 }
 
 zss_editor.decreaseFontSize = function() {
-	var current_selection = $(zss_editor.getSelectedNode());
+	var current_selection = $(zss_editor.getSelectedNode()),
+        font_size;
     if (current_selection) {
-    	var font_size = parseFloat(current_selection.css('font-size'));
+    	font_size = parseFloat(current_selection.css('font-size'));
     	if (font_size) {
     		for (var i in zss_editor.fontStyle) {
     			if (zss_editor.fontStyle[7-i] < font_size) {

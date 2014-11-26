@@ -11,17 +11,17 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>6C2C2B670C50C326F4CDE75C16826EDA0491AEF0</key>
-		<string>https://github.com/nnhubbard/ZSSRichTextEditor.git</string>
+		<string>https://github.com/pixnet/ZSSRichTextEditor.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ZSSRichTextEditor.xcodeproj/project.xcworkspace</string>
+	<string>ZSSRichTextEditor.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6C2C2B670C50C326F4CDE75C16826EDA0491AEF0</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/nnhubbard/ZSSRichTextEditor.git</string>
+	<string>https://github.com/pixnet/ZSSRichTextEditor.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
