@@ -349,9 +349,10 @@ zss_editor.setBackgroundColor = function(color) {
 }
 
 zss_editor.increaseFontSize = function() {
-	var current_selection = $(zss_editor.getSelectedNode()),
+    var sel = document.getSelection(),
+	    current_selection = $(zss_editor.getSelectedNode()),
         font_size;
-    if (current_selection) {
+    if (current_selection || sel.toString().length != 0) {
     	font_size = parseFloat(current_selection.css('font-size'));
     	if (font_size) {
     		for (var i in zss_editor.fontStyle) {
@@ -363,7 +364,21 @@ zss_editor.increaseFontSize = function() {
     	} else {
     		font_size = zss_editor.fontStyle[4];
     	}
-    	current_selection.css('font-size', '' + font_size + 'px');
+        
+        if (sel.toString().length != 0) {
+            if (sel.rangeCount) {
+                var el = document.createElement("span");
+                el.setAttribute("style", "font-size: " + font_size + 'px');
+                
+                var range = sel.getRangeAt(0).cloneRange();
+                range.surroundContents(el);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        } else {
+            current_selection.css('font-size', font_size + 'px');
+        }
+
     	return;
     } else {
 		if (zss_editor.currentFontSize >= 7) {
@@ -374,9 +389,10 @@ zss_editor.increaseFontSize = function() {
 }
 
 zss_editor.decreaseFontSize = function() {
-	var current_selection = $(zss_editor.getSelectedNode()),
+    var sel = document.getSelection(),
+	    current_selection = $(zss_editor.getSelectedNode()),
         font_size;
-    if (current_selection) {
+    if (current_selection || sel.toString().length != 0) {
     	font_size = parseFloat(current_selection.css('font-size'));
     	if (font_size) {
     		for (var i in zss_editor.fontStyle) {
@@ -385,10 +401,25 @@ zss_editor.decreaseFontSize = function() {
     				break;
     			}
     		}
+            
+
     	} else {
     		font_size = zss_editor.fontStyle[2];
     	}
-    	current_selection.css('font-size', '' + font_size + 'px');
+        
+        if (sel.toString().length != 0) {
+            if (sel.rangeCount) {
+                var el = document.createElement("span");
+                el.setAttribute("style", "font-size: " + font_size + 'px');
+                
+                var range = sel.getRangeAt(0).cloneRange();
+                range.surroundContents(el);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        } else {
+            current_selection.css('font-size', font_size + 'px');
+        }
         
     	return;
 	} else {
