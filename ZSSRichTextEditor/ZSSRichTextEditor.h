@@ -92,6 +92,7 @@ typedef NS_ENUM(NSInteger, ZSSRichTextEditorToolbar) {
  */
 @property (nonatomic, strong) UIColor *toolbarItemSelectedTintColor;
 
+@property (nonatomic) BOOL isFocusTextEditor;
 /**
  *  Sets the HTML for the entire editor
  *

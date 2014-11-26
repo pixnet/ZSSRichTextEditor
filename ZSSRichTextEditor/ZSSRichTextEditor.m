@@ -112,7 +112,7 @@ static Class hackishFixClass = Nil;
     }
     
     self.editorLoaded = NO;
-    self.shouldShowKeyboard = YES;
+    self.shouldShowKeyboard = NO;
     self.formatHTML = YES;
     
     // Source View
@@ -1194,10 +1194,16 @@ static Class hackishFixClass = Nil;
     CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
+        _isFocusTextEditor = YES;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"editorKeyboardStatus" object:_isFocusTextEditor? [NSNumber numberWithBool:YES]:[NSNumber numberWithBool:NO]];
+        
         [UIView animateWithDuration:duration animations:^{
             _toolbarHolder.alpha = 1;
         }];
     } else {
+        _isFocusTextEditor = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"editorKeyboardStatus" object:_isFocusTextEditor? [NSNumber numberWithBool:YES]:[NSNumber numberWithBool:NO]];
         [UIView animateWithDuration:duration animations:^{
             _toolbarHolder.alpha = 0;
         }];
