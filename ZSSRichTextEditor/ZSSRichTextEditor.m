@@ -1180,7 +1180,9 @@ static Class hackishFixClass = Nil;
     [UIView animateWithDuration:duration animations:^{
         CGRect frame = _toolbarHolder.frame;
         _toolbarHolder.alpha = 1;
-        _toolbarHolder.frame = CGRectMake(0, rect.origin.y-20-44-44, frame.size.width, frame.size.height);
+        //Change to fit PIXNET custom View form Cloud
+        
+        _toolbarHolder.frame = CGRectMake(0, rect.origin.y-20-44-44-45, frame.size.width, frame.size.height);
         
     }];
     
