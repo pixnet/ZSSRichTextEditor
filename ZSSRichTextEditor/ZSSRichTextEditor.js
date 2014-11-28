@@ -430,6 +430,11 @@ zss_editor.decreaseFontSize = function() {
 	}
 }
 
+zss_editor.backspace = function() {
+    document.execCommand('delete', false, null);
+    return;
+}
+
 zss_editor.removeImage = function() {
     var current_selection = $(zss_editor.getSelectedNode()),
         t = current_selection.prop("tagName").toLowerCase();
