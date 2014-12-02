@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HRColorPickerViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 /**
  *  The types of toolbar items that can be added
@@ -54,7 +55,7 @@ typedef NS_ENUM(NSInteger, ZSSRichTextEditorToolbar) {
 /**
  *  The viewController used with ZSSRichTextEditor
  */
-@interface ZSSRichTextEditor : UIViewController <UIWebViewDelegate, HRColorPickerViewControllerDelegate, UITextViewDelegate>
+@interface ZSSRichTextEditor : UIViewController <UIWebViewDelegate, HRColorPickerViewControllerDelegate, UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 
 /**
