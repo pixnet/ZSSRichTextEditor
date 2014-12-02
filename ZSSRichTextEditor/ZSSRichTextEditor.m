@@ -950,7 +950,7 @@ static Class hackishFixClass = Nil;
 - (void)insertImage {
     
     
-    UIActionSheet *imageSource = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍攝相片", @"手機相簿", @"痞客邦相簿", nil];
+    UIActionSheet *imageSource = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍攝相片", @"手機相簿", nil];
     
     [imageSource showInView:self.view];
     
@@ -1005,8 +1005,11 @@ static Class hackishFixClass = Nil;
     //NSLog(@"jifisofdiosfsdiofds");
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     image = [self scaleImage:image toScale:0.2];
+    NSString *imageBase64String = @"data:image/jpeg;base64,";
+//    NSData *imageBase64Data = UIImageJPEGRepresentation(image, 1.0);
+//    imageBase64String = [imageBase64String stringByAppendingString:[imageBase64Data base64EncodedStringWithOptions:NSdata]]
     
-    NSString *imageBase64String = [UIImageJPEGRepresentation(image, 1.0) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    imageBase64String = [imageBase64String stringByAppendingFormat:@"%@", [UIImageJPEGRepresentation(image, 1.0) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
     //NSLog(@"%@", imageBase64String);
     [picker dismissViewControllerAnimated:YES completion:nil];
     
