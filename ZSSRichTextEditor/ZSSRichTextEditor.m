@@ -107,9 +107,10 @@ static Class hackishFixClass = Nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    }
+    //custom from cloud
+//    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//    }
     
     self.editorLoaded = NO;
     self.shouldShowKeyboard = NO;
@@ -547,13 +548,18 @@ static Class hackishFixClass = Nil;
     self.toolbar.frame = CGRectMake(0, 0, toolbarWidth, 44);
     self.toolBarScroll.contentSize = CGSizeMake(self.toolbar.frame.size.width, 44);
 }
+/*
+ 因為在PixPanel端是使用 UIViewControllerChildCon
+ 
+ */
 
-
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowOrHide:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowOrHide:) name:UIKeyboardWillHideNotification object:nil];
+    //Custom from Cloud
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 
