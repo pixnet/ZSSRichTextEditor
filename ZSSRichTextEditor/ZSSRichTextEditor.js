@@ -540,12 +540,12 @@ zss_editor.prepareInsert = function() {
 }
 
 zss_editor.insertImage = function(url, alt) {
-    alert(url);
-	//zss_editor.restorerange();
-	var html = '<img src="'+url+'" alt="'+alt+'" />';
-    
+    //alert(url);
+	zss_editor.restorerange();
+    var html = '<img src="'+url+'" alt="'+alt+'" />';
 	zss_editor.insertHTML(html);
 	zss_editor.enabledEditingItems();
+
 }
 
 zss_editor.insertMore = function()
@@ -565,8 +565,11 @@ zss_editor.insertHTML = function(html) {
     if($html.find('p').length>0){
         $html.find('p').css('font-size', '' + zss_editor.fontStyle[zss_editor.currentFontSize] + 'px');
     }
-    document.execCommand('insertHTML', false, $html.html());
+    document.execCommand('insertHTML', true, $html.html());
     zss_editor.enabledEditingItems();
+
+//    document.execCommand('insertHTML', false, html);
+//    zss_editor.enabledEditingItems();
 }
 
 zss_editor.getHTML = function() {
