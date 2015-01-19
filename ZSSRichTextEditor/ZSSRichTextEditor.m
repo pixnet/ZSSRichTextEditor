@@ -351,7 +351,7 @@ static Class hackishFixClass = Nil;
     if (_enabledToolbarItems & ZSSRichTextEditorToolbarViewSource || _enabledToolbarItems & ZSSRichTextEditorToolbarAll) {
         /*圖片大小跟原本的不合，先不處理‌‌*/
         //        ZSSBarButtonItem *loadMore = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"more.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loadMore:)];
-        ZSSBarButtonItem *loadMore = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn_readmore_h.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loadMore)];
+        ZSSBarButtonItem *loadMore = [[ZSSBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn_readmore_h.png"] style:UIBarButtonItemStylePlain target:self action:@selector(loadMore:)];
         //        ZSSBarButtonItem *loadMore = [[ZSSBarButtonItem alloc] initWithTitle:@"more" style:UIBarButtonItemStylePlain target:self action:@selector(loadMore:)];
         loadMore.label = @"loadMore";
         [items addObject:loadMore];
