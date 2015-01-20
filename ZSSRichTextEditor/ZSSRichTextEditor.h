@@ -10,6 +10,7 @@
 #import "HRColorPickerViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 /**
  *  The types of toolbar items that can be added
  */
@@ -51,13 +52,22 @@ typedef NS_ENUM(NSInteger, ZSSRichTextEditorToolbar) {
 };
 
 @class ZSSBarButtonItem;
+@class ZSSRichTextEditor;
+@protocol ZSSRichTextEditorDelegate <NSObject>
+
+- (void)notificationLoadingViewWillDismiss;
+
+@end
 
 /**
  *  The viewController used with ZSSRichTextEditor
  */
 @interface ZSSRichTextEditor : UIViewController <UIWebViewDelegate, HRColorPickerViewControllerDelegate, UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-
+/**
+ *  The Class's Delegate
+ */
+@property (nonatomic, strong) id <ZSSRichTextEditorDelegate> delegate;
 /**
  *  The base URL to use for the webView
  */
