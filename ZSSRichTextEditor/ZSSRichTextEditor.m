@@ -947,20 +947,20 @@ static Class hackishFixClass = Nil;
 - (void)quickLink {
     [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.quickLink();"];
 }
-#warning fix here
 - (void)insertImage {
     [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
     //[self insertImage:@"" alt:@""];
-    UIActionSheet *imageSource = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍攝相片", @"手機相簿",@"test", nil];
+    //TODO: 要加痞客相簿
+    UIActionSheet *imageSource = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍攝相片", @"手機相簿", nil];
     
     [imageSource showInView:self.view];
-
     
-//    [self testuploadimage];
-
+    
+    //    [self testuploadimage];
+    
     // Save the selection location
     //[self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
-
+    
     //[self showInsertImageDialogWithLink:self.selectedImageURL alt:self.selectedImageAlt];
     
 }
