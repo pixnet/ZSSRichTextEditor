@@ -153,7 +153,7 @@ zss_editor.getCaretYPosition = function() {
 
 zss_editor.calculateEditorHeightWithCaretPosition = function() {
 
-    var padding = 50;
+    var padding = 130;
     var c = zss_editor.getCaretYPosition();
     var e = document.getElementById('zss_editor_content');
 
@@ -167,7 +167,7 @@ zss_editor.calculateEditorHeightWithCaretPosition = function() {
     if (c < offsetY) {
         newPos = c;
     } else if (c > (offsetY + height - padding)) {
-        var newPos = c - height + padding - 18;
+        var newPos = c - height + padding;
     }
 
     window.scrollTo(0, newPos);

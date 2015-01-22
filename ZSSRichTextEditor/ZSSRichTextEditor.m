@@ -971,7 +971,7 @@ static Class hackishFixClass = Nil;
             UIImagePickerController *imagePicker = [UIImagePickerController new];
             [imagePicker setDelegate:self];
             [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-            [imagePicker setAllowsEditing:YES];
+//            [imagePicker setAllowsEditing:YES];
             
             [self presentViewController:imagePicker animated:YES completion:nil];
             //[self performSelector:@selector(showCarema) withObject:nil afterDelay:1];
@@ -984,7 +984,7 @@ static Class hackishFixClass = Nil;
             UIImagePickerController *imagePicker = [UIImagePickerController new];
             [imagePicker setDelegate:self];
             [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-            [imagePicker setAllowsEditing:YES];
+//            [imagePicker setAllowsEditing:YES];
             
             [self presentViewController:imagePicker animated:YES completion:nil];
 //            BOOL cameraAvailableFlag = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
