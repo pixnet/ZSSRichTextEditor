@@ -951,7 +951,7 @@ static Class hackishFixClass = Nil;
     [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
     //[self insertImage:@"" alt:@""];
     //TODO: 要加痞客相簿
-    UIActionSheet *imageSource = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍攝相片", @"手機相簿", nil];
+    UIActionSheet *imageSource = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍攝相片", @"手機相簿",@"痞客邦相簿", nil];
     
     [imageSource showInView:self.view];
     
