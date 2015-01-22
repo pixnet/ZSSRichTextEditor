@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, ZSSRichTextEditorToolbar) {
 @protocol ZSSRichTextEditorDelegate <NSObject>
 
 - (void)notificationLoadingViewWillDismiss;
-
+- (void)usePIXNETPhoto;
 @end
 
 /**
@@ -208,6 +208,11 @@ typedef NS_ENUM(NSInteger, ZSSRichTextEditorToolbar) {
  */
 - (void)editorDidScrollWithPosition:(NSInteger)position;
 
-
+/**
+ *  GetPIXNETPhotoImage
+ *
+ *  @param image image
+ */
+- (void)pixnetPhoto:(UIImage *)image;
 - (void)dismissKeyboard;
 @end

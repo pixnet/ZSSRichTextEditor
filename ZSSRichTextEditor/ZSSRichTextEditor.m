@@ -993,13 +993,32 @@ static Class hackishFixClass = Nil;
 //            
         }break;
         case 2:{
-            NSLog(@"nothing to do");
-            [self testuploadimage];
+            [self.delegate usePIXNETPhoto];
+//            NSLog(@"nothing to do");
+//            [self testuploadimage];
         }break;
             
         default:
             break;
     }
+}
+
+-(void)pixnetPhoto:(UIImage *)image
+{
+    [self dismissKeyboard];
+    
+    //NSLog(@"jifisofdiosfsdiofds");
+    image = [self scaleImage:image toScale:0.5];
+    NSString *imageBase64String = @"data:image/jpeg;base64,";
+    
+    imageBase64String = [imageBase64String stringByAppendingFormat:@"%@", [UIImageJPEGRepresentation(image, 1.0) base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]];
+    
+    dispatch_queue_t globalQ = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_apply(1, globalQ, ^(size_t index) {
+        [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.prepareInsert();"];
+        [self insertImage:imageBase64String alt:@""];
+        
+    });
 }
 
 
